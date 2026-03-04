@@ -22,10 +22,10 @@ export default function MainNavigation() {
     const mobileMenu = menu.filter(item => ["Login", "Register"].includes(item.title));
 
     return (
-        <nav className="sticky top-0 bg-teal-600 backdrop-blur-md text-white z-50 max-w-7xl mx-auto rounded-b-xl">
+        <nav className="sticky top-0 bg-teal-800/80 backdrop-blur-md text-white z-50 max-w-7xl mx-auto">
             <div className="max-w-7xl mx-auto px-8 py-4 flex items-center justify-between">
                 {/* Logo link (Home) */}
-                <Link href="/" className="flex flex-col text-lg font-bold ">
+                <Link href="/" className="flex flex-col text-lg font-bold focus:outline-none">
                     <span>BookShelf</span>
                 </Link>
 
@@ -33,7 +33,7 @@ export default function MainNavigation() {
                 <ul className="hidden md:flex gap-6">
                     {desktopMenu.map((item) => (
                         <li key={item.href}>
-                            <Link className="px-4 py-3 rounded transition-all border border-transparent hover:border-white flex items-center gap-2" href={item.href}>
+                            <Link className="px-4 py-3 rounded border border-transparent hover:bg-teal-800/80 transition flex items-center gap-2 focus:outline-none" href={item.href}>
                                 {getIcon(item.title)}
                                 {item.title}
                             </Link>
@@ -53,10 +53,10 @@ export default function MainNavigation() {
 
             {/* Mobile menu: Login and Register */}
             {isOpen && (
-                <ul className="md:hidden flex flex-col gap-4 px-8 py-4 bg-teal-600 backdrop-blur-md text-white text-right">
+                <ul className="md:hidden absolute left-0 top-full w-full flex flex-col gap-4 px-8 py-4 bg-teal-800/80 backdrop-blur-md text-white text-right z-50">
                     {mobileMenu.map((item) => (
                         <li key={item.href}>
-                            <Link href={item.href} onClick={() => setIsOpen(false)}>
+                            <Link href={item.href} onClick={() => setIsOpen(false)} className="focus:outline-none">
                                 {item.title}
                             </Link>
                         </li>
