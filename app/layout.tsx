@@ -14,9 +14,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">
-        <MainNavigation />
-        {children}
+      <body>
+        <header>
+          <MainNavigation />
+        </header>
+        <main className="max-w-7xl mx-auto">
+          {children}
+        </main>
       </body>
     </html>
   );
