@@ -11,7 +11,7 @@ const title = "Login";
 
 export default function Login() {
     return (
-        <div>
+        <div className="max-w-7xl mx-auto px-4">
             <article>
                 <h1>{title}</h1>
             </article>
