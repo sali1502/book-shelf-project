@@ -2,15 +2,16 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-bluegray-100: var(--clr-bluegray-100);
-  --color-bluegray-200: var(--clr-bluegray-200);
-  --color-bluegray-300: var(--clr-bluegray-300);
-  --color-bluegray-400: var(--clr-bluegray-400);
-  --color-bluegray-800: var(--clr-bluegray-800);
-  --color-bluegray-900: var(--clr-bluegray-900);
+  --color-teal-300: #649e94;
+  --color-teal-400: #478c80;
+  --color-teal-500: #347a6c;
+  --color-teal-600: #306e61;
+  --color-teal-700: #2b5f53;
+  --color-teal-800: #255045;
+  --color-teal-900: #19362d;
+  
   --font-base: "Open Sans", "Segoe UI", system-ui, sans-serif;
+  
   --spacing-1: 0.25rem;
   --spacing-2: 0.5rem;
   --spacing-3: 0.75rem;
@@ -22,22 +23,14 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
   font-family: var(--font-base);
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   text-wrap: balance;
 }
 
-p,
-li {
+p, li {
   text-wrap: pretty;
 }
 

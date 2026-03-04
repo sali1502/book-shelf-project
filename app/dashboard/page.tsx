@@ -11,7 +11,7 @@ const title = "Dashboard";
 
 export default function Dashboard() {
     return (
-        <div>
+        <div className="max-w-7xl mx-auto px-4">
             <article>
                 <h1>{title}</h1>
             </article>
