@@ -9,9 +9,9 @@
   --color-teal-700: #2b5f53;
   --color-teal-800: #255045;
   --color-teal-900: #19362d;
-  
+
   --font-base: "Open Sans", "Segoe UI", system-ui, sans-serif;
-  
+
   --spacing-1: 0.25rem;
   --spacing-2: 0.5rem;
   --spacing-3: 0.75rem;
@@ -26,11 +26,17 @@ body {
   font-family: var(--font-base);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   text-wrap: balance;
 }
 
-p, li {
+p,
+li {
   text-wrap: pretty;
 }
 
