@@ -24,7 +24,8 @@ export default async function Home({
 }: {
     searchParams?: Promise<{ q?: string; limit?: string; offset?: string }>;
 }) {
-    // Resolve search parameters from URL
+    // Get search parameters from URL (q from search inputfield in hero)
+    // resolvedSearchParams -> searchQuery -> fetchBooks
     const resolvedSearchParams = (await searchParams) ?? {};
 
     // Get search query, limit, and offset for pagination

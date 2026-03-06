@@ -1,8 +1,8 @@
-
 /*  Books grid component */
 
 import BookCard from "./book-card";
 import type { Book } from "@/components/types/book";
+import Link from "next/link";
 
 // BooksGrid receives an array of books
 export default function BooksGrid({ books }: { books: Book[] }) {
@@ -15,15 +15,16 @@ export default function BooksGrid({ books }: { books: Book[] }) {
 
 	// Render books in a responsive grid
 	return (
-		<section className="py-12 px-4 mx-15">
+		<section className="py-12 px-4 mx-8">
 			{/* Section title */}
 			<h2 className="text-3xl font-bold mb-8 text-gray-900">Books</h2>
 			{/* Grid of book cards */}
 			<ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 				{books.map((book) => (
 					<li key={book.id}>
-						{/* Render a BookCard for each book */}
-						<BookCard book={book} />
+						<Link href={`/book/${book.id}`} className="block h-full">
+							<BookCard book={book} />
+						</Link>
 					</li>
 				))}
 			</ul>

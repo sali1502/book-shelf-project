@@ -10,7 +10,7 @@ export default function BookCard({ book }: { book: Book }) {
     return (
         <article className="group bg-white rounded-xl overflow-hidden hover:shadow-2xl transition-all duration-300 border border-gray-200 h-full flex">
             {/* Header - image */}
-            <header className="relative overflow-hidden w-24 h-32 shrink-0 group-hover:scale-105 transition-transform duration-300">
+            <header className="relative overflow-hidden w-16 h-20 shrink-0 group-hover:scale-105 transition-transform duration-300">
                 {cleanedUrl ? (
                     isValidUrl ? (
                         <img

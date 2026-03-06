@@ -62,3 +62,30 @@ export async function fetchBooks(
     }
 }
 
+// Fetch book with id from Google Books API
+export async function fetchBookById(id: string): Promise<any | null> {
+    try {
+        const url = `${GOOGLE_BOOKS_API_URL}/${id}${API_KEY ? `?key=${API_KEY}` : ""}`;
+        const res = await fetch(url, { cache: "no-store" });
+        if (!res.ok) {
+            console.error("Failed to fetch book by id");
+            return null;
+        }
+        const item = await res.json();
+        return {
+            id: item.id,
+            title: item.volumeInfo.title || "Unknown",
+            description: item.volumeInfo.description || "",
+            authors: item.volumeInfo.authors || [],
+            categories: item.volumeInfo.categories || [],
+            images: item.volumeInfo.imageLinks
+                ? [item.volumeInfo.imageLinks.thumbnail || item.volumeInfo.imageLinks.small]
+                : [],
+            publishedDate: item.volumeInfo.publishedDate || "",
+            pageCount: item.volumeInfo.pageCount || 0,
+        };
+    } catch (error) {
+        console.error("Error fetching book by id:", error);
+        return null;
+    }
+}
