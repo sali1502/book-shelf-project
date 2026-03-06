@@ -5,7 +5,7 @@
 // Import Next.js navigation hooks
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-// Props for Pagination: total books, books per page, and current offset (from app/page.tsx)
+// Props for Pagination: total books, books per page, and current offset (from app/page)
 interface PaginationProps {
   total: number;  // Total number of books
   limit: number; // Books per page
@@ -36,24 +36,30 @@ export default function Pagination({ total, limit, offset }: PaginationProps) {
   if (totalPages <= 1) return null;
 
   return (
-    <div className="flex gap-2 justify-center py-4">
-      {/* Previous page button */}
+    <div className="flex gap-2 justify-center py-6">
+      {/* Previous page button with chevron */}
       <button
-        className="px-3 py-1 border rounded disabled:opacity-50"
+        className="px-3 py-2 rounded bg-teal-700 text-white font-semibold shadow hover:bg-teal-800 transition border border-transparent disabled:opacity-50"
         onClick={() => goToPage(currentPage - 1)}
         disabled={currentPage === 1}
+        aria-label="Previous page"
       >
-        Previous
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
       </button>
       {/* Show current page and total pages */}
-      <span className="px-2">Page {currentPage} of {totalPages}</span>
-      {/* Next page button */}
+      <span className="px-4 py-2 rounded bg-white text-teal-700 font-semibold border shadow">Page {currentPage} of {totalPages}</span>
+      {/* Next page button with chevron */}
       <button
-        className="px-3 py-1 border rounded disabled:opacity-50"
+        className="px-3 py-2 rounded bg-teal-700 text-white font-semibold shadow hover:bg-teal-800 transition border border-transparent disabled:opacity-50"
         onClick={() => goToPage(currentPage + 1)}
         disabled={currentPage === totalPages}
+        aria-label="Next page"
       >
-        Next
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
       </button>
     </div>
   );

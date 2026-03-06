@@ -15,7 +15,7 @@ export default function BooksGrid({ books }: { books: Book[] }) {
 
 	// Render books in a responsive grid
 	return (
-		<section className="py-12 px-4">
+		<section className="py-12 px-4 mx-15">
 			{/* Section title */}
 			<h2 className="text-3xl font-bold mb-8 text-gray-900">Books</h2>
 			{/* Grid of book cards */}

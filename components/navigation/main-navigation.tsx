@@ -33,7 +33,7 @@ export default function MainNavigation() {
                 <ul className="hidden md:flex gap-6">
                     {desktopMenu.map((item) => (
                         <li key={item.href}>
-                            <Link className="px-4 py-3 rounded border border-transparent hover:border hover:border-white transition flex items-center gap-2 focus:outline-none" href={item.href}>
+                            <Link className="px-4 py-3 rounded border border-transparent hover:bg-teal-800/50 transition flex items-center gap-2 focus:outline-none" href={item.href}>
                                 {getIcon(item.title)}
                                 {item.title}
                             </Link>

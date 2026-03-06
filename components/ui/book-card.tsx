@@ -8,9 +8,9 @@ export default function BookCard({ book }: { book: Book }) {
     const isValidUrl = cleanedUrl && (cleanedUrl.startsWith("http://") || cleanedUrl.startsWith("https://"));
 
     return (
-        <article className="group bg-white rounded-xl overflow-hidden hover:shadow-2xl transition-all duration-300 border border-gray-200 h-full">
+        <article className="group bg-white rounded-xl overflow-hidden hover:shadow-2xl transition-all duration-300 border border-gray-200 h-full flex">
             {/* Header - image */}
-            <header className="relative overflow-hidden w-1/5 shrink-0 h-24 group-hover:scale-105 transition-transform duration-300">
+            <header className="relative overflow-hidden w-24 h-32 shrink-0 group-hover:scale-105 transition-transform duration-300">
                 {cleanedUrl ? (
                     isValidUrl ? (
                         <img
@@ -31,7 +31,7 @@ export default function BookCard({ book }: { book: Book }) {
                 )}
             </header>
             {/* Book content */}
-            <div className="p-3 flex flex-col grow w-3/5 relative">
+            <div className="p-3 flex flex-col grow w-full">
                 <h3 className="text-sm font-bold text-gray-900 mb-1">{title}</h3>
                 {/* Authors */}
                 {authors && authors.length > 0 && (
