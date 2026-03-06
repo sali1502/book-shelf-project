@@ -1,4 +1,4 @@
-/* Books card component */
+/* Book card component */
 
 import type { Book } from "@/components/types/book";
 

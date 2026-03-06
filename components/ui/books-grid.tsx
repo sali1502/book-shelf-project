@@ -1,6 +1,6 @@
 /* Books grid component */
 
-import BooksCard from "./books-card";
+import BookCard from "./book-card";
 import type { Book } from "@/components/types/book";
 
 export default function BooksGrid({ books }: { books: Book[] }) {
@@ -16,7 +16,7 @@ export default function BooksGrid({ books }: { books: Book[] }) {
 			<ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 				{books.map((book) => (
 					<li key={book.id}>
-						<BooksCard book={book} />
+						<BookCard book={book} />
 					</li>
 				))}
 			</ul>
