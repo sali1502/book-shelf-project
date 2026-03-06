@@ -1,34 +1,42 @@
-/* Fetch from Google Books API */
+// Fetch book data from Google Books API
 
 const GOOGLE_BOOKS_API_URL = "https://www.googleapis.com/books/v1/volumes";
 const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_BOOKS_API_KEY;
 
-// Build API URL: ?q=Hobbit&maxResults=12&startIndex=0&key=DIN_API_KEY
+// Fetch books from Google Books API based on search query, limit, and offset (for pagination)
 export async function fetchBooks(
-    query: string = "Hobbit",
-    limit: number = 12,
-    offset: number = 0
+    query: string = "Hobbit", // Search term
+    limit: number = 12,       // Number of books per page
+    offset: number = 0        // Pagination offset
 ): Promise<{ books: any[]; total: number }> {
     try {
+        // Set start index for pagination
         const startIndex = offset;
+        // Build query parameters for API request
         const params = new URLSearchParams({
             q: query,
             maxResults: limit.toString(),
             startIndex: startIndex.toString(),
         });
+        // Add API key if available
         if (API_KEY) {
             params.append("key", API_KEY);
         }
+        // Construct full API URL
         const url = `${GOOGLE_BOOKS_API_URL}?${params.toString()}`;
+        // Fetch data from Google Books API (no cache)
         const res = await fetch(url, { cache: "no-store" });
 
+        // Handle failed response
         if (!res.ok) {
             console.error("Failed to fetch from Google Books API");
             return { books: [], total: 0 };
         }
 
+        // Parse JSON response
         const data = await res.json();
 
+        // Map API response to book objects
         const books = (data.items || []).map((item: any) => ({
             id: item.id,
             title: item.volumeInfo.title || "Unknown",
@@ -42,25 +50,15 @@ export async function fetchBooks(
             pageCount: item.volumeInfo.pageCount || 0,
         }));
 
+        // Return books and total number of results
         return {
             books,
             total: data.totalItems || 0,
         };
     } catch (error) {
+        // Handle errors
         console.error("Error fetching books:", error);
         return { books: [], total: 0 };
     }
 }
 
-export async function getPopularCategories(): Promise<string[]> {
-    return [
-        "fiction",
-        "mystery",
-        "romance",
-        "science fiction",
-        "fantasy",
-        "biography",
-        "history",
-        "self-help",
-    ];
-}
