@@ -2,7 +2,7 @@
 
 "use client";
 
-// Import Next.js navigation hooks
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 // Props for Pagination: total books, books per page, and current offset (from app/page)
@@ -44,9 +44,7 @@ export default function Pagination({ total, limit, offset }: PaginationProps) {
         disabled={currentPage === 1}
         aria-label="Previous page"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-        </svg>
+        <ChevronLeft className="w-5 h-5" />
       </button>
       {/* Show current page and total pages */}
       <span className="px-4 py-2 rounded bg-white text-teal-700 font-semibold border shadow">Page {currentPage} of {totalPages}</span>
@@ -57,9 +55,7 @@ export default function Pagination({ total, limit, offset }: PaginationProps) {
         disabled={currentPage === totalPages}
         aria-label="Next page"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-        </svg>
+        <ChevronRight className="w-5 h-5" />
       </button>
     </div>
   );
