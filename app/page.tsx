@@ -1,11 +1,11 @@
 /* Landing page */
 
-// Import metadata, UI components, and fetchBooks function
+// Imports
 import type { Metadata } from "next";
 import Hero from "../components/ui/hero";
 import BooksGrid from "../components/ui/books-grid";
 import Pagination from "../components/ui/pagination";
-import { fetchBooks } from "../lib/google-books";
+import { searchBooks } from "../lib/google-books";
 
 // Page metadata
 export const metadata: Metadata = {
@@ -13,42 +13,42 @@ export const metadata: Metadata = {
     description: "Read and write reviews for books",
 };
 
-// Pagination defaults
+// Default pagination values
 const DEFAULT_LIMIT = 12;
 const ALLOWED_LIMITS = new Set([6, 12]);
 const DEFAULT_OFFSET = 0;
 
-// Home component: Landing page
+// Home page component
 export default async function Home({
     searchParams,
 }: {
     searchParams?: Promise<{ q?: string; limit?: string; offset?: string }>;
 }) {
-    // Resolve search parameters from URL
+    // Read query values from URL
     const resolvedSearchParams = (await searchParams) ?? {};
 
-    // Get search query, limit, and offset for pagination
+    // Use defaults
     const searchQuery = resolvedSearchParams.q ?? "Hobbit";
     const rawLimit = Number.parseInt(resolvedSearchParams.limit ?? "", 10);
     const limit = ALLOWED_LIMITS.has(rawLimit) ? rawLimit : DEFAULT_LIMIT;
     const rawOffset = Number.parseInt(resolvedSearchParams.offset ?? "", 10);
     const offset = Number.isFinite(rawOffset) && rawOffset >= 0 ? rawOffset : DEFAULT_OFFSET;
 
-    // Fetch books and total count from API
-    const { books, total } = await fetchBooks(searchQuery, limit, offset);
+    // Get books and total count
+    const { books, total } = await searchBooks(searchQuery, limit, offset);
 
-    // Render landing page with hero, books grid, and pagination
+    // Render page
     return (
         <div>
             <Hero />
-            {/* Show error if no books are found */}
+            {/* Empty state */}
             {books.length === 0 ? (
                 <div className="text-center text-red-500 py-8">
                     Inga böcker hittades eller API-anropet misslyckades.
                 </div>
             ) : (
                 <>
-                    {/* Show books grid and pagination */}
+                    {/* Results and pager */}
                     <BooksGrid books={books} />
                     <Pagination total={total} limit={limit} offset={offset} />
                 </>
