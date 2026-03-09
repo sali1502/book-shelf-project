@@ -5,39 +5,39 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-// Props for Pagination: total books, books per page, and current offset (from app/page)
+// Input values from the page
 interface PaginationProps {
-  total: number;  // Total number of books
+  total: number; // Total books
   limit: number; // Books per page
-  offset: number; // Current offset (start index)
+  offset: number; // Start index
 }
 
 export default function Pagination({ total, limit, offset }: PaginationProps) {
-  const router = useRouter(); // For navigation
+  const router = useRouter(); // Navigate pages
   const pathname = usePathname(); // Current path
   const searchParams = useSearchParams(); // Current query params
 
-  // Calculate current page number
+  // Current page number
   const currentPage = Math.floor(offset / limit) + 1;
-  // Calculate total number of pages
+  // Total page count
   const totalPages = Math.ceil(total / limit);
 
-  // Navigate to a specific page by updating the offset in the URL
+  // Change page by updating URL offset
   const goToPage = (page: number) => {
     const params = new URLSearchParams(searchParams.toString());
-    params.set("offset", String((page - 1) * limit)); // Set new offset
+    params.set("offset", String((page - 1) * limit));
     const query = params.toString();
     const nextUrl = query ? `${pathname}?${query}` : pathname;
-    router.push(nextUrl, { scroll: false }); // Navigate without scrolling
-    router.refresh(); // Refresh data
+    router.push(nextUrl, { scroll: false }); // Stay on same scroll position
+    router.refresh(); // Reload server data
   };
 
-  // Hide pagination if only one page
+  // Hide if only one page
   if (totalPages <= 1) return null;
 
   return (
     <div className="flex gap-2 justify-center py-6">
-      {/* Previous page button with chevron */}
+      {/* Previous page */}
       <button
         className="px-3 py-2 rounded bg-teal-700 text-white font-semibold shadow hover:bg-teal-800 transition border border-transparent disabled:opacity-50"
         onClick={() => goToPage(currentPage - 1)}
@@ -46,9 +46,9 @@ export default function Pagination({ total, limit, offset }: PaginationProps) {
       >
         <ChevronLeft className="w-5 h-5" />
       </button>
-      {/* Show current page and total pages */}
+      {/* Current page indicator */}
       <span className="px-4 py-2 rounded bg-white text-teal-700 font-semibold border shadow">Page {currentPage} of {totalPages}</span>
-      {/* Next page button with chevron */}
+      {/* Next page */}
       <button
         className="px-3 py-2 rounded bg-teal-700 text-white font-semibold shadow hover:bg-teal-800 transition border border-transparent disabled:opacity-50"
         onClick={() => goToPage(currentPage + 1)}
