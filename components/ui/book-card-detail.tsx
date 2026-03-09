@@ -8,9 +8,9 @@ export default function BookCardDetail({ book }: { book: Book }) {
     const isValidUrl = cleanedUrl && (cleanedUrl.startsWith("http://") || cleanedUrl.startsWith("https://"));
 
     return (
-        <article className="flex flex-col md:flex-row bg-white rounded-xl overflow-hidden shadow-2xl border border-gray-200 max-w-6xl w-full mx-auto">
+        <article className="flex flex-col lg:flex-row bg-white rounded-xl overflow-hidden shadow-2xl border border-gray-200 max-w-6xl w-full mx-auto">
             {/* Book image */}
-            <div className="relative overflow-hidden w-24 h-32 min-w-24 min-h-32 md:w-32 md:h-48 shrink-0 m-6 md:ml-0 md:mx-0 md:mr-6">
+            <div className="relative overflow-hidden w-24 h-32 min-w-24 min-h-32 lg:w-32 lg:h-48 shrink-0 m-6 lg:ml-0 lg:mx-0 lg:mr-6">
                 {cleanedUrl && isValidUrl ? (
                     <img
                         src={cleanedUrl}
@@ -24,8 +24,9 @@ export default function BookCardDetail({ book }: { book: Book }) {
                     </div>
                 )}
             </div>
+
             {/* Book info */}
-            <div className="flex flex-col justify-center p-6 w-full md:w-3/4 md:flex-1">
+            <div className="flex flex-col justify-center p-6 w-full lg:w-3/4 lg:flex-1">
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">{title}</h2>
                 <p className="text-base text-gray-700 mb-4">{description.replace(/<[^>]+>/g, "")}</p>
                 {authors && authors.length > 0 && (
