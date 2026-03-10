@@ -1,8 +1,10 @@
+/* Login forn */
+
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useEffect, useId, useState } from "react";
 import { supabase } from "@/lib/supabase/client";
 
 export default function LoginForm() {
@@ -11,6 +13,8 @@ export default function LoginForm() {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const emailId = useId();
+    const passwordId = useId();
 
     // If a session exists, send user to dashboard
     useEffect(() => {
@@ -51,7 +55,7 @@ export default function LoginForm() {
         });
 
         if (signInError) {
-            // Show API error to user
+            // Show error to user
             setError(signInError.message);
             setIsLoading(false);
             return;
@@ -65,15 +69,20 @@ export default function LoginForm() {
     return (
         <section className="w-full max-w-md rounded-2xl border border-teal-200 bg-white p-6 shadow-xl">
             <h1 className="text-2xl font-bold text-teal-900">Login</h1>
-            <p className="mt-1 text-sm text-teal-800">Sign in to manage your reviews.</p>
+            <p className="mt-1 text-sm text-teal-800">
+                Sign in to manage your reviews.
+            </p>
 
             <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
                 <div>
-                    <label className="mb-1 block text-sm font-semibold text-teal-900" htmlFor="email">
+                    <label
+                        className="mb-1 block text-sm font-semibold text-teal-900"
+                        htmlFor={emailId}
+                    >
                         Email
                     </label>
                     <input
-                        id="email"
+                        id={emailId}
                         type="email"
                         autoComplete="email"
                         value={email}
@@ -86,11 +95,14 @@ export default function LoginForm() {
                 </div>
 
                 <div>
-                    <label className="mb-1 block text-sm font-semibold text-teal-900" htmlFor="password">
+                    <label
+                        className="mb-1 block text-sm font-semibold text-teal-900"
+                        htmlFor={passwordId}
+                    >
                         Password
                     </label>
                     <input
-                        id="password"
+                        id={passwordId}
                         type="password"
                         autoComplete="current-password"
                         value={password}
@@ -114,7 +126,10 @@ export default function LoginForm() {
             </form>
 
             <p className="mt-4 text-sm text-teal-900">
-                Need an account? <Link className="font-semibold underline" href="/register">Register</Link>
+                Need an account?{" "}
+                <Link className="font-semibold underline" href="/register">
+                    Register
+                </Link>
             </p>
         </section>
     );
