@@ -1,20 +1,17 @@
 /* Login page */
 
 import type { Metadata } from "next";
+import LoginForm from "@/components/auth/login-form";
 
 export const metadata: Metadata = {
-    title: "Login",
-    description: "Login to create bookreviews",
+	title: "Login",
+	description: "Login to create bookreviews",
 };
 
-const title = "Login";
-
 export default function Login() {
-    return (
-        <div className="max-w-7xl mx-auto px-4">
-            <article>
-                <h1>{title}</h1>
-            </article>
-        </div>
-    )
+	return (
+		<div className="mx-auto flex min-h-[70vh] w-full max-w-7xl items-center justify-center px-4 py-12">
+			<LoginForm />
+		</div>
+	);
 }

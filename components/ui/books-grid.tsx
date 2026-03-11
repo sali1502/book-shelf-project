@@ -1,8 +1,8 @@
 /*  Books grid component */
 
-import BookCard from "./book-card";
-import type { Book } from "@/components/types/book";
 import Link from "next/link";
+import type { Book } from "@/components/types/book";
+import BookCard from "./book-card";
 
 // BooksGrid receives an array of books
 export default function BooksGrid({ books }: { books: Book[] }) {
