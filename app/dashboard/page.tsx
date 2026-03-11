@@ -22,7 +22,6 @@ export default async function Dashboard() {
 
     return (
         <section className="max-w-7xl mx-auto px-4 py-6 space-y-2">
-            <h1 className="text-2xl font-bold text-teal-900">Dashboard</h1>
             <p className="text-sm text-teal-800">
                 Logged in as {user.email ?? "unknown user"}
             </p>

@@ -3,11 +3,13 @@
 import { LogIn, UserPlus, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import menu from "../data/menu.json";
+import DashboardLogoutButton from "../auth/dashboard-logout-button";
 
 export default function MainNavigation() {
-	// State for mobile menu open/close
 	const [isOpen, setIsOpen] = useState(false);
+	const pathname = usePathname();
 
 	// Icons for auth buttons
 	const getIcon = (title: string) => {
@@ -16,14 +18,11 @@ export default function MainNavigation() {
 		return null;
 	};
 
-	// Desktop menu: Home (logo), Login, Register
-	const desktopMenu = menu.filter((item) =>
-		["Login", "Register"].includes(item.title),
-	);
-	// Mobile menu: Login and Register
-	const mobileMenu = menu.filter((item) =>
-		["Login", "Register"].includes(item.title),
-	);
+	const desktopMenu = menu.filter((item) => ["Login", "Register"].includes(item.title));
+	const mobileMenu = menu.filter((item) => ["Login", "Register"].includes(item.title));
+
+	// Only show logout button on dashboard
+	const showLogout = pathname === "/dashboard";
 
 	return (
 		<nav className="sticky top-0 bg-teal-700 backdrop-blur-md text-white z-50 max-w-7xl mx-auto">
@@ -35,22 +34,26 @@ export default function MainNavigation() {
 				>
 					<span>BookShelf</span>
 				</Link>
-
-				{/* Desktop menu: Login and Register */}
+				{/* Desktop menu: auth buttons */}
 				<ul className="hidden md:flex gap-6">
-					{desktopMenu.map((item) => (
-						<li key={item.href}>
-							<Link
-								className="px-4 py-3 rounded border border-transparent hover:bg-teal-800/50 transition flex items-center gap-2 focus:outline-none"
-								href={item.href}
-							>
-								{getIcon(item.title)}
-								{item.title}
-							</Link>
+					{showLogout ? (
+						<li>
+							<DashboardLogoutButton />
 						</li>
-					))}
+					) : (
+						desktopMenu.map((item) => (
+							<li key={item.href}>
+								<Link
+									className="px-4 py-3 rounded border border-transparent hover:bg-teal-800/50 transition flex items-center gap-2 focus:outline-none"
+									href={item.href}
+								>
+									{getIcon(item.title)}
+									{item.title}
+								</Link>
+							</li>
+						))
+					)}
 				</ul>
-
 				{/* Mobile menu toggle button */}
 				<button
 					type="button"
@@ -65,21 +68,26 @@ export default function MainNavigation() {
 					)}
 				</button>
 			</div>
-
-			{/* Mobile menu: Login and Register */}
+			{/* Mobile menu: auth buttons */}
 			{isOpen && (
 				<ul className="md:hidden absolute left-0 top-full w-full flex flex-col gap-4 px-8 py-4 bg-teal-700 backdrop-blur-md text-white text-right z-50">
-					{mobileMenu.map((item) => (
-						<li key={item.href}>
-							<Link
-								href={item.href}
-								onClick={() => setIsOpen(false)}
-								className="focus:outline-none"
-							>
-								{item.title}
-							</Link>
+					{showLogout ? (
+						<li>
+							<DashboardLogoutButton />
 						</li>
-					))}
+					) : (
+						mobileMenu.map((item) => (
+							<li key={item.href}>
+								<Link
+									href={item.href}
+									onClick={() => setIsOpen(false)}
+									className="focus:outline-none"
+								>
+									{item.title}
+								</Link>
+							</li>
+						))
+					)}
 				</ul>
 			)}
 		</nav>

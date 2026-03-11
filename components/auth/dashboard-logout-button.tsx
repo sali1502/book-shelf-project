@@ -4,6 +4,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { LogOut } from "lucide-react";
 import { supabase } from "@/lib/supabase/client";
 
 export default function DashboardLogoutButton() {
@@ -13,9 +14,15 @@ export default function DashboardLogoutButton() {
     // Handle logout: sign out user and redirect to login.
     async function handleLogout() {
         setIsLoading(true);
-        await supabase.auth.signOut();
-        router.replace("/login");
-        router.refresh();
+        try {
+            await supabase.auth.signOut();
+            router.replace("/login");
+            router.refresh();
+        } catch (err) {
+            console.error("Logout failed", err);
+        } finally {
+            setIsLoading(false);
+        }
     }
 
     return (
@@ -23,8 +30,9 @@ export default function DashboardLogoutButton() {
             type="button"
             onClick={handleLogout}
             disabled={isLoading}
-            className="rounded-lg bg-teal-700 px-4 py-2 font-semibold text-white transition hover:bg-teal-800 disabled:cursor-not-allowed disabled:opacity-60"
+            className="px-4 py-3 rounded border border-transparent hover:bg-teal-800/50 transition flex items-center gap-2 focus:outline-none font-semibold text-white"
         >
+            <LogOut size={20} />
             {isLoading ? "Logging out..." : "Log out"}
         </button>
     );
