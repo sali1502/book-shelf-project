@@ -25,7 +25,7 @@ export default async function Home({
 	// Read query values from URL
 	const resolvedSearchParams = (await searchParams) ?? {};
 
-	// Use defaults
+	// Initial values for first fetch/render, with validation ready for future filtering
 	const searchQuery = resolvedSearchParams.q ?? "Hobbit";
 	const rawLimit = Number.parseInt(resolvedSearchParams.limit ?? "", 10);
 	const limit = ALLOWED_LIMITS.has(rawLimit) ? rawLimit : DEFAULT_LIMIT;
@@ -37,17 +37,19 @@ export default async function Home({
 	const { books, total } = await searchBooks(searchQuery, limit, offset);
 
 	// Render page
+	// Always show search UI, then conditionally render either empty state or results
 	return (
 		<div>
 			<Hero />
-			{/* Empty state */}
+			{/*  */}
 			{books.length === 0 ? (
+				// Empty state for both "no matches" and fetch failure
 				<div className="text-center text-red-500 py-8">
 					Inga böcker hittades eller API-anropet misslyckades.
 				</div>
 			) : (
 				<>
-					{/* Results and pager */}
+					{/* Results booklist + server-driven pagination controls */}
 					<BooksGrid books={books} />
 					<Pagination total={total} limit={limit} offset={offset} />
 				</>

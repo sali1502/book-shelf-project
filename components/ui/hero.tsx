@@ -34,7 +34,8 @@ export default function Hero() {
 					<br />
 					Read reviews and share your thoughts!
 				</p>
-				{/* Search form */}
+				{/* Search form (client): trims input and updates ?q=... in the URL
+    				the query is then read in app/page.tsx (server), which calls Google Books */}
 				<form className="mt-6 flex justify-center" onSubmit={handleSubmit}>
 					<label htmlFor={searchInputId} className="sr-only">
 						Search books

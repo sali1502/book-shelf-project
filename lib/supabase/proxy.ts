@@ -1,4 +1,4 @@
-/* Supabase proxy session and routs guards */
+/* Supabase proxy session and routes guards */
 
 import { createServerClient } from "@supabase/ssr";
 import { type NextRequest, NextResponse } from "next/server";

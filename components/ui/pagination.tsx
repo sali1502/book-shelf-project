@@ -12,6 +12,8 @@ interface PaginationProps {
 	offset: number; // Start index
 }
 
+// Client pagination click updates offset in URL
+// app/page.tsx then re-renders on the server and fetches new books
 export default function Pagination({ total, limit, offset }: PaginationProps) {
 	const router = useRouter(); // Navigate pages
 	const pathname = usePathname(); // Current path
@@ -22,7 +24,8 @@ export default function Pagination({ total, limit, offset }: PaginationProps) {
 	// Total page count
 	const totalPages = Math.ceil(total / limit);
 
-	// Change page by updating URL offset
+	// Client: update URL with new offset
+	// This triggers a new server render of app/page.tsx, which fetches new books
 	const goToPage = (page: number) => {
 		const params = new URLSearchParams(searchParams.toString());
 		params.set("offset", String((page - 1) * limit));

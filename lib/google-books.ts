@@ -1,6 +1,10 @@
+/* Fetch data from Google Books API */
+
+import "server-only";
+
 import type { Book } from "../components/types/book";
 
-// Data shape from Google Books API
+// Shape of Google Books API response
 type GoogleVolumeItem = {
 	id?: string;
 	volumeInfo?: {
@@ -23,12 +27,10 @@ type GoogleVolumesResponse = {
 };
 
 const GOOGLE_BOOKS_API_URL = "https://www.googleapis.com/books/v1/volumes";
-const API_KEY =
-	process.env.GOOGLE_BOOKS_API_KEY ||
-	process.env.NEXT_PUBLIC_GOOGLE_BOOKS_API_KEY;
+const API_KEY = process.env.GOOGLE_BOOKS_API_KEY;
 
+// Convert a Google volume item to the app's Book model
 function mapGoogleVolumeToBook(item: GoogleVolumeItem): Book {
-	// Convert Google data to Book type
 	const info = item.volumeInfo;
 	return {
 		id: item.id ?? "",
@@ -46,13 +48,14 @@ function mapGoogleVolumeToBook(item: GoogleVolumeItem): Book {
 	};
 }
 
+// Default fallback search books with query, page size and start index
 export async function searchBooks(
 	query: string = "Hobbit",
 	limit: number = 12,
 	offset: number = 0,
 ): Promise<{ books: Book[]; total: number }> {
 	try {
-		// Build search params
+		// Build API query params: q (search term), maxResults, startIndex (search term from search box)
 		const params = new URLSearchParams({
 			q: query,
 			maxResults: limit.toString(),
@@ -62,7 +65,7 @@ export async function searchBooks(
 		if (API_KEY) {
 			params.append("key", API_KEY);
 		}
-
+		// Fetch fresh server-side data
 		const url = `${GOOGLE_BOOKS_API_URL}?${params.toString()}`;
 		const res = await fetch(url, { cache: "no-store" });
 
@@ -71,6 +74,7 @@ export async function searchBooks(
 			return { books: [], total: 0 };
 		}
 
+		// Parse Google response and map items to Book interface
 		const data = (await res.json()) as GoogleVolumesResponse;
 		const books = (data.items || [])
 			.map(mapGoogleVolumeToBook)
@@ -86,9 +90,9 @@ export async function searchBooks(
 	}
 }
 
+// Fetch a single book by Google volume ID (server side)
 export async function fetchBookById(id: string): Promise<Book | null> {
 	try {
-		// Get one book by Id
 		const url = `${GOOGLE_BOOKS_API_URL}/${id}${API_KEY ? `?key=${API_KEY}` : ""}`;
 		const res = await fetch(url, { cache: "no-store" });
 		if (!res.ok) {
