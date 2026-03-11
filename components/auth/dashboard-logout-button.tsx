@@ -1,4 +1,4 @@
-/* Logout button for dashboard */
+/* Logout button: signs out user from Supabase and redirects to login */
 
 "use client";
 
@@ -10,6 +10,7 @@ export default function DashboardLogoutButton() {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
 
+    // Handle logout: sign out user and redirect to login.
     async function handleLogout() {
         setIsLoading(true);
         await supabase.auth.signOut();

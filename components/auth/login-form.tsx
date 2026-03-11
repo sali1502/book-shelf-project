@@ -1,4 +1,4 @@
-/* Login forn */
+/* Login form: handles user authentication via Supabase from the client side */
 
 "use client";
 
@@ -16,7 +16,7 @@ export default function LoginForm() {
     const emailId = useId();
     const passwordId = useId();
 
-    // If a session exists, send user to dashboard
+    // On mount: if user is already logged in, redirect to dashboard
     useEffect(() => {
         let isMounted = true;
 
@@ -37,31 +37,33 @@ export default function LoginForm() {
         };
     }, [router]);
 
-    // Submit login credentials to Supabase Auth
+    // Handle form submit: send login credentials to Supabase Auth
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
         setError("");
 
+        // Basic client-side validation
         if (!email.trim() || !password.trim()) {
-            setError("Please enter both email and password.");
+            setError("Please enter both email and password");
             return;
         }
 
         setIsLoading(true);
 
+        // Call Supabase Auth API for login
         const { error: signInError } = await supabase.auth.signInWithPassword({
             email: email.trim(),
             password,
         });
 
         if (signInError) {
-            // Show error to user
+            // Show error message to user
             setError(signInError.message);
             setIsLoading(false);
             return;
         }
 
-        // Refresh routes after successful login
+        // On successful login: redirect to dashboard and refresh session
         router.push("/dashboard");
         router.refresh();
     }

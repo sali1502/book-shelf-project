@@ -1,4 +1,4 @@
-/* Register form */
+/* Register form: handles user sign-up via Supabase from the client side */
 
 "use client";
 
@@ -19,6 +19,7 @@ export default function RegisterForm() {
 	const passwordId = useId();
 	const confirmPasswordId = useId();
 
+	// Handle form submit: send registration data to Supabase Auth
 	async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 		setError("");
@@ -26,24 +27,28 @@ export default function RegisterForm() {
 
 		const trimmedEmail = email.trim();
 
+		// Basic client-side validation
 		if (!trimmedEmail || !password.trim() || !confirmPassword.trim()) {
-			setError("Please fill in email, password and confirm password.");
+			setError("Please fill in email, password and confirm password");
 			return;
 		}
 
+		// Password must be at least 8 characters
 		if (password.length < 8) {
-			setError("Password must be at least 8 characters.");
+			setError("Password must be at least 8 characters");
 			return;
 		}
 
+		// Passwords must match
 		if (password !== confirmPassword) {
-			setError("Passwords do not match.");
+			setError("Passwords do not match");
 			return;
 		}
 
 		// Run signup only after all client-side validations pass
 		setIsLoading(true);
 
+		// Call Supabase Auth API for registration
 		const { data, error: signUpError } = await supabase.auth.signUp({
 			email: trimmedEmail,
 			password,
@@ -53,12 +58,13 @@ export default function RegisterForm() {
 		});
 
 		if (signUpError) {
+			// Show error message to user
 			setError(signUpError.message);
 			setIsLoading(false);
 			return;
 		}
 
-		// If email confirmation is disabled, Supabase can return an active session immediately (email confirmation is disabled for dev)
+		// If email confirmation is disabled, Supabase can return an active session immediately
 		if (data.session) {
 			router.push("/dashboard");
 			router.refresh();
