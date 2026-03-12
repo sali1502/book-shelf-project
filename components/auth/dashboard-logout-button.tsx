@@ -11,7 +11,7 @@ export default function DashboardLogoutButton() {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
 
-    // Handle logout: sign out user and redirect to login.
+    // Handle logout: sign out user and redirect to login
     async function handleLogout() {
         setIsLoading(true);
         try {
@@ -30,9 +30,10 @@ export default function DashboardLogoutButton() {
             type="button"
             onClick={handleLogout}
             disabled={isLoading}
-            className="px-4 py-3 rounded border border-transparent hover:bg-teal-800/50 transition flex items-center gap-2 focus:outline-none font-semibold text-white"
+            className="px-4 py-3 rounded border border-transparent hover:bg-teal-800/50 transition font-semibold text-white text-right w-full md:w-auto md:flex md:items-center md:gap-2 focus:outline-none"
         >
-            <LogOut size={20} />
+            {/* Visa ikon endast på desktop */}
+            <span className="hidden md:inline-block"><LogOut size={20} /></span>
             {isLoading ? "Logging out..." : "Log out"}
         </button>
     );

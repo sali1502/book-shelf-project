@@ -10,12 +10,14 @@ import { supabase } from "@/lib/supabase/client";
 export default function RegisterForm() {
 	const router = useRouter();
 	const [email, setEmail] = useState("");
+	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [error, setError] = useState("");
 	const [success, setSuccess] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
 	const emailId = useId();
+	const usernameId = useId();
 	const passwordId = useId();
 	const confirmPasswordId = useId();
 
@@ -28,8 +30,8 @@ export default function RegisterForm() {
 		const trimmedEmail = email.trim();
 
 		// Basic client-side validation
-		if (!trimmedEmail || !password.trim() || !confirmPassword.trim()) {
-			setError("Please fill in email, password and confirm password");
+		if (!trimmedEmail || !username.trim() || !password.trim() || !confirmPassword.trim()) {
+			setError("Please fill in email, username, password and confirm password");
 			return;
 		}
 
@@ -62,6 +64,19 @@ export default function RegisterForm() {
 			setError(signUpError.message);
 			setIsLoading(false);
 			return;
+		}
+
+		// Create profilerow in supabase serverside via API
+		if (data.user) {
+			await fetch("/api/profile", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					user_id: data.user.id,
+					email: data.user.email,
+					username: username
+				})
+			});
 		}
 
 		// If email confirmation is disabled, Supabase can return an active session immediately
@@ -100,6 +115,25 @@ export default function RegisterForm() {
 						value={email}
 						onChange={(event) => setEmail(event.target.value)}
 						placeholder="you@example.com"
+						className="w-full rounded-lg border border-teal-300 px-3 py-2 text-sm outline-none transition focus:border-teal-500 focus:ring-2 focus:ring-teal-300"
+						disabled={isLoading}
+						required
+					/>
+				</div>
+				<div>
+					<label
+						className="mb-1 block text-sm font-semibold text-teal-900"
+						htmlFor={usernameId}
+					>
+						Username
+					</label>
+					<input
+						id={usernameId}
+						type="text"
+						autoComplete="username"
+						value={username}
+						onChange={(event) => setUsername(event.target.value)}
+						placeholder="Choose a username"
 						className="w-full rounded-lg border border-teal-300 px-3 py-2 text-sm outline-none transition focus:border-teal-500 focus:ring-2 focus:ring-teal-300"
 						disabled={isLoading}
 						required

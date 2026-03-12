@@ -3,6 +3,7 @@
 import type { Metadata } from "next";
 import MainNavigation from "../components/navigation/main-navigation";
 import "./globals.css";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
 	title: "Book Shelf Project",
@@ -21,6 +22,7 @@ export default function RootLayout({
 					<MainNavigation />
 				</header>
 				<main className="max-w-7xl mx-auto">{children}</main>
+				<Toaster position="top-center" />
 			</body>
 		</html>
 	);
