@@ -5,13 +5,13 @@ Uses /api/profile for CRUD operations. */
 "use client";
 
 import { useState, useEffect } from "react";
+import { Pencil } from "lucide-react";
+import { toast } from "react-hot-toast";
 
 type Profile = {
     user_id: string;
     username: string;
 };
-import { Pencil } from "lucide-react";
-import { toast } from "react-hot-toast";
 
 export default function UserProfileCrud() {
     // User profile CRUD component

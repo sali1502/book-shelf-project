@@ -1,6 +1,5 @@
+/*  API route for profile CRUD */
 
-
-// API route for profile CRUD
 import { NextResponse } from "next/server";
 import { getUserProfile, updateUserProfile } from "@/components/user/user-crud";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
