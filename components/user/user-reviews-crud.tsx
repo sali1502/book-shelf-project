@@ -54,7 +54,7 @@ export default function UserReviewsCrud() {
         toast.success("Review created!");
         setNewReview({ book_id: "", review_text: "" });
         // Update list
-        setReviews([...reviews, { id: json.id || "", book_id: newReview.book_id, review_text: newReview.review_text, username: "du" }]);
+        setReviews([...reviews, { id: json.id || "", book_id: newReview.book_id, review_text: newReview.review_text, username: "you" }]);
       } else toast.error(json.error || "Could not create review");
     } catch {
       toast.error("Could not create review");
@@ -141,7 +141,7 @@ export default function UserReviewsCrud() {
                     </div>
                     <div className="mt-4">
                       <button onClick={() => setEditReview(r)} className="bg-teal-700 text-white px-3 py-1 rounded mr-2">Edit</button>
-                      <button onClick={() => handleDelete(r.id)} className="bg-red-800 text-white px-3 py-1 rounded">Delete</button>
+                      <button onClick={() => handleDelete(r.id)} className="bg-red-500 text-white px-3 py-1 rounded">Delete</button>
                     </div>
                   </div>
                 </li>
