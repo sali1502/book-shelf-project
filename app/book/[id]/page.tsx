@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import BookCardDetail from "@/components/ui/book-card-detail";
-import BookReviewsAccordion from "@/components/ui/book-reviews-accordion";
+import BookReviewsPublic from "@/components/ui/book-reviews-public";
 import { fetchBookById } from "../../../lib/google-books";
 
 export default async function BookPage({
@@ -41,7 +41,7 @@ export default async function BookPage({
 
 			<div className="container mx-auto px-4 py-8 w-full">
 				<BookCardDetail book={book} />
-				<BookReviewsAccordion />
+				<BookReviewsPublic bookId={id} />
 			</div>
 		</div>
 	);

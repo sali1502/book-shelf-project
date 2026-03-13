@@ -1,10 +1,11 @@
-/*  API route for profile CRUD */
+// API route for profile CRUD
+// Handles create, read, and update for user profiles
 
 import { NextResponse } from "next/server";
 import { getUserProfile, updateUserProfile } from "@/components/user/user-crud";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
-// Create a new profile row
+// Create a new profile row (POST)
 export async function POST(request: Request) {
     try {
         const { user_id, username } = await request.json();
@@ -25,7 +26,7 @@ export async function POST(request: Request) {
     }
 }
 
-// Get current user's profile
+// Get current user's profile (GET)
 export async function GET() {
     try {
         const profile = await getUserProfile();
@@ -35,7 +36,7 @@ export async function GET() {
     }
 }
 
-// Update current user's profile
+// Update current user's profile (PUT)
 export async function PUT(request: Request) {
     try {
         const { username } = await request.json();
