@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import DashboardLogoutButton from "@/components/auth/dashboard-logout-button";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import UserProfileCrud from "@/components/user/user-profile-crud";
+import UserReviewsCrud from "@/components/user/user-reviews-crud";
 
 export const metadata: Metadata = {
     title: "Dashboard",
@@ -18,7 +19,7 @@ export default async function Dashboard() {
         redirect("/login");
     }
 
-    // Hämta profil
+    // Get profile
     const { data: profile } = await supabase
         .from("profiles")
         .select("username")
@@ -31,8 +32,18 @@ export default async function Dashboard() {
                 Logged in as {profile?.username || user.email || "unknown user"}
             </p>
             <DashboardLogoutButton />
-            {/* CRUD UI */}
+            {/* Profile CRUD UI */}
             <UserProfileCrud />
+            {/* Reviews CRUD UI */}
+            <details className="w-full mx-auto mt-6 max-w-2xl md:max-w-4xl lg:max-w-6xl bg-white rounded-xl border border-gray-200 shadow" open>
+                <summary className="cursor-pointer list-none px-5 py-4 font-semibold text-teal-700 flex items-center justify-between">
+                    <span>Reviews</span>
+                    <span className="text-sm text-gray-500">Click to open/close</span>
+                </summary>
+                <div className="px-5 pb-5 border-t border-gray-100">
+                    <UserReviewsCrud />
+                </div>
+            </details>
         </section>
     );
 }
