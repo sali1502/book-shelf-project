@@ -38,23 +38,20 @@ It features user authentication, integration with Google Books API, and a respon
 
 ## 📸 Screenshots
 
-### Landing Page
+### Landing page - desktop
 ![Landing Desktop](./screenshots/landing-desktop.png)
-![Landing Mobile](./screenshots/landing-mobile.png)
 
-### Details page
+### Details page - desktop
 ![Details Desktop](./screenshots/details-desktop.png)
-![Details Mobile](./screenshots/details-mobile.png)
 
-### Dashboard
+### Dashboard - desktop
 ![Dashboard Desktop](./screenshots/dashboard-desktop.png)
-![Dashboard Mobile](./screenshots/dashboard-mobile.png)
 
-### Login/Register
+### Login - mobile
 ![Login Mobile](./screenshots/login-mobile.png)
+
+### Register - mobile
 ![Register Mobile](./screenshots/register-mobile.png)
-
-
 
 ## Author
 - Name: Åsa Lindskog
