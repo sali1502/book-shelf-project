@@ -57,7 +57,7 @@ It features user authentication, integration with Google Books API, and a respon
 
 
 ## Author
-- Namn: Åsa Lindskog
+- Name: Åsa Lindskog
 - GitHub: [sali1502](https://github.com/sali1502)
 
 ## 🚧 Project Status
