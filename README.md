@@ -1,3 +1,73 @@
+# Book Shelf Project
+
+Book Shelf Project is a web application for searching books, writing and managing reviews, and handling user profiles.  
+It features user authentication, integration with Google Books API, and a responsive dashboard for review management.
+
+## ✨ Features
+- User authentication (login/register) via Supabase
+- CRUD for book reviews
+- Profile management
+- Integration with Google Books API for book search
+- Search and pagination of books using query parameters
+- Responsive app for reading and managing reviews
+
+## 🛠️ Tech Stack
+- Next.js
+- Supabase
+- React
+- Tailwind CSS
+
+## Installation
+1. Clone the project:
+   ```
+   git clone https://github.com/sali1502/book-shelf-project.git
+   ```
+2. Navigate to the project folder:
+   ```
+   cd book-shelf-project
+   ```
+3. Install dependencies:
+   ```
+   npm install
+   ```
+4. Create a `.env.local` file and add your Supabase keys.
+5. Start the development server:
+   ```
+   npm run dev
+   ```
+
+## 📸 Screenshots
+
+### Landing Page
+![Landing Desktop](./screenshots/landing-desktop.png)
+![Landing Mobile](./screenshots/landing-mobile.png)
+
+### Details page
+![Details Desktop](./screenshots/details-desktop.png)
+![Details Mobile](./screenshots/details-mobile.png)
+
+### Dashboard
+![Dashboard Desktop](./screenshots/dashboard-desktop.png)
+![Dashboard Mobile](./screenshots/dashboard-mobile.png)
+
+### Login/Register
+![Login Mobile](./screenshots/login-mobile.png)
+![Register Mobile](./screenshots/register-mobile.png)
+
+
+
+## Author
+- Namn: Åsa Lindskog
+- GitHub: [sali1502](https://github.com/sali1502)
+
+## 🚧 Project Status
+
+This project is ongoing and improvements are planned, including:
+- Full CRUD for reviews is implemented, but currently book IDs must be entered manually in the review form.
+- Planned: Implement a book search feature using the Google Books API, allowing users to select a book and automatically link its ID to the review.
+- Planned: Add a dedicated books table in the database to store selected books, and connect reviews to books and users more seamlessly.
+- Full CRUD for users (not just updating profile names), which may require admin functionality for user management.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
