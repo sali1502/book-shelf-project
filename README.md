@@ -30,11 +30,20 @@ It features user authentication, integration with Google Books API, and a respon
    ```
    npm install
    ```
-4. Create a `.env.local` file and add your Supabase keys.
-5. Start the development server:
+4. Create your own Supabase project. Configure the `profiles` and `reviews` tables, authentication, and the required Row Level Security policies.
+5. Create a `.env.local` file in the project root:
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+   NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your_supabase_publishable_key
+   GOOGLE_BOOKS_API_KEY=your_google_books_api_key
+   ```
+   The Google Books API key is optional, but Supabase configuration is required for authentication, profiles, and reviews.
+6. Start the development server:
    ```
    npm run dev
    ```
+
+Never commit `.env.local` or expose API keys in the repository. The file is ignored by Git through `.gitignore`.
 
 ## 📸 Screenshots
 
