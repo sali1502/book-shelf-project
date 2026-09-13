@@ -59,11 +59,15 @@ It features user authentication, integration with Google Books API, and a respon
 
 ## 🚧 Project Status
 
-This project is ongoing and improvements are planned, including:
-- Full CRUD for reviews is implemented, but currently book IDs must be entered manually in the review form.
-- Planned: Implement a book search feature using the Google Books API, allowing users to select a book and automatically link its ID to the review.
-- Planned: Add a dedicated books table in the database to store selected books, and connect reviews to books and users more seamlessly.
-- Full CRUD for users (not just updating profile names), which may require admin functionality for user management.
+The application currently supports Google Books search and pagination on the landing page. Users can browse books and open a details page for each book.
+
+Review CRUD is implemented. At the moment, users enter the Google Books ID manually when creating a review.
+
+Future improvements include:
+
+- Allowing users to select a book from the Google Books search when creating a review.
+- Adding a dedicated `books` table and connecting books, reviews, and users through database relationships.
+- Expanding profile management into full user CRUD with admin functionality.
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
